@@ -43,11 +43,11 @@ namespace MVC_EF_Start
             services.AddSession();
 
             // Register the hosted service
-            services.AddHostedService<DataImportService>();
+            //services.AddHostedService<DataImportService>();
         }
-    }
+    
 
-        public class DataImportService : IHostedService
+/*public class DataImportService : IHostedService
         {
             private readonly IServiceProvider _serviceProvider;
 
@@ -69,12 +69,13 @@ namespace MVC_EF_Start
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
+    */
 
-        /*
+        
 
             // this is the version from the MVC template
             public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+             {
             //This ensures that the database and tables are created as per the Models.
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
@@ -100,9 +101,9 @@ namespace MVC_EF_Start
             {
                 routes.MapRoute(
               name: "default",
-              template: "{controller=Home}/{action=MainPage}/{id?}");
+              template: "{controller=Home}/{action=RegionGrouping}/{id?}");
             });
         }
-        */
+        
     }
 }

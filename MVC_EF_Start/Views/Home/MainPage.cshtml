@@ -4,16 +4,6 @@
 
 @model MVC_EF_Start.Models.ChartModel
 
-@if (Model == null)
-{
-    <p style="color: red;">Model is null!</p>
-}
-else
-{
-    <p>ChartType: @Model.ChartType</p>
-    <p>Data: @Model.Data</p>
-    <!-- Add similar lines for other properties -->
-}
 
 <!DOCTYPE html>
 
@@ -74,12 +64,14 @@ else
     </div>
 
     <div class="main">
-        <p style="max-width:1000px; margin: auto;"> </p>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <p style="max-width:1000px; margin: auto"> </p>
+        <canvas id="myChart" width="300" height="150"></canvas>
+       
         <script>
             var ctx = document.getElementById('myChart').getContext('2d');
-            var data = @Html.Raw(Model.Data);
-            var labels = @Html.Raw(Model.Labels);
+            var labels = @Html.Raw(Json.Serialize(Model.Labels));
+            var data = @Html.Raw(Json.Serialize(Model.Data));
+           
             var chartType = '@Model.ChartType';
 
             console.log("Data before chart initialization: ", data);
@@ -95,9 +87,10 @@ else
                         datasets: [{
                             label: '@Model.Title',
                             data: data,
-                            backgroundColor: @Html.Raw(Model.Colors)
-                            }]
+                            backgroundColor: @Html.Raw(Json.Serialize(Model.Colors))
+                        }]
                     },
+                    maintainAspectRatio: false, // Set maintainAspectRatio to false
                     options: {
                         scales: {
                             xAxes: [
